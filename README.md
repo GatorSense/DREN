@@ -62,7 +62,6 @@ https://github.com/GatorSense/DREN
     ├── demo.py   //Run this. Main demo file.
     ├── Demo_Parameters.py // Parameters file for demo.
     ├── Prepare_Data.py  // Load data for demo file.
-    ├── Prepare_Data_Results.py // Load data for results file.
     ├── Texture_Information.py // Class names and directories for datasets.
     ├── View_Results.py // Run this after demo to view saved results.
     ├── View_Results_Parameters.py // Parameters file for results.

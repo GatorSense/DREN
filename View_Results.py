@@ -27,7 +27,6 @@ from Utils.Generate_TSNE_visual import Generate_TSNE_visual
 from Texture_information import Class_names
 from Demo_Parameters import Network_parameters as Results_parameters
 from Utils.Network_functions import initialize_model
-# from Prepare_Data_Results import Prepare_DataLoaders
 from Prepare_Data import Prepare_DataLoaders
 from Utils.RBFHistogramPooling import HistogramLayer
 from Utils.Confusion_mats import plot_confusion_matrix, plot_avg_confusion_matrix
