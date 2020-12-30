@@ -98,14 +98,14 @@ If you use the Divergence Regulated Encoder Network (DREN) code, please cite the
 
 **Plain Text:**
 
-Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2021). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint arXiv:2001.00215.
+Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2021). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint (will be posted soon).
 
 **BibTex:**
 ```
 @article{peeples2021divergence,
   title={Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification},
   author={Peeples, Joshua and Walker, Sarah and McCurley, Connor and Zare, Alina and Keller, James},
-  journal={arXiv will be updated soon},
+  journal={arXiv will be posted soon},
   year={2021}
 }
 ```
