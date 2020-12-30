@@ -4,9 +4,9 @@
 _Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, and James Keller_
 
 Note: If this code is used, cite it: Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, & James Keller. 
-(Date). GatorSense/DREN: Initial Release (Version v2.0). 
-Zendo. (link to DOI will be posted soon)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3731417.svg)](link will be posted soon)
+(Date). GatorSense/DREN: Initial Release (Version v1.0). 
+Zendo.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4404604.svg)](https://doi.org/10.5281/zenodo.4404604)
 
 [[`arXiv`](link to ArXiv paper will be posted soon)]
 
