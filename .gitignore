@@ -1,0 +1,10 @@
+# Ignore datasets
+Datasets/DTD/
+Datasets/GTOS/
+Datasets/gtos-mobile/
+Datasets/minc-2500/
+Datasets/KTH-TIPS2-b/
+
+# Ignore saved model
+Saved_Models/
+Results/
