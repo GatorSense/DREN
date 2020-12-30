@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Demo for deep embedding research
-Current script is only for experiments on
-single cpu/gpu. If you want to run the demo
-on multiple gpus (two were used in paper), 
-please contact me at jpeeples@ufl.edu 
-for the parallel version of 
+Main script for divergence regulated encoder network (DREN)
 demo.py
 @author: jpeeples
 """
