@@ -3,6 +3,8 @@
 Created on Mon Jun 29 23:26:52 2020
 
 @author: jpeeples
+Code modified from mini-batch TSNE embedding:
+https://github.com/HanchenXiong/deep-tsne-embedding
 """
 import torch
 import torch.autograd as autograd
