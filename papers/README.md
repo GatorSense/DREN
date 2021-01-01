@@ -12,14 +12,14 @@ _Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare and James Keller_
 
 **Plain Text:**
 
-Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2021). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint arXiv:2001.00215.
+Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2021). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint arXiv: 2012.15764.
 
 **BibTex:**
 ```
 @article{peeples2021divergence,
   title={Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification},
   author={Peeples, Joshua and Walker, Sarah and McCurley, Connor and Zare, Alina and Keller, James},
-  journal={arXiv will be updated soon},
+  journal={arXiv preprint arXiv: 2012.15764},
   year={2021}
 }
 ```
