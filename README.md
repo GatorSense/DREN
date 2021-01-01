@@ -4,7 +4,7 @@
 _Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, and James Keller_
 
 Note: If this code is used, cite it: Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, & James Keller. 
-(Date). GatorSense/DREN: Initial Release (Version v1.0). 
+(2020, December 30). GatorSense/DREN: Initial Release (Version v1.0). 
 Zenodo. https://doi.org/10.5281/zenodo.4404604 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4404604.svg)](https://doi.org/10.5281/zenodo.4404604)
 
@@ -98,14 +98,14 @@ If you use the Divergence Regulated Encoder Network (DREN) code, please cite the
 
 **Plain Text:**
 
-Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2021). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint (will be posted soon).
+Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2021). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint arXiv: 2012.15764.
 
 **BibTex:**
 ```
 @article{peeples2021divergence,
   title={Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification},
   author={Peeples, Joshua and Walker, Sarah and McCurley, Connor and Zare, Alina and Keller, James},
-  journal={arXiv will be posted soon},
+  journal={arXiv preprint arXiv: 2012.15764},
   year={2021}
 }
 ```
