@@ -4,7 +4,7 @@
 _Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare and James Keller_
 
 **Link to paper**
-[[`arXiv`](https://arxiv.org/abs/2001.00215)]
+[[`arXiv`](https://arxiv.org/abs/2012.15764)]
 
 [[`BibTeX`](#CitingHist)]
 
