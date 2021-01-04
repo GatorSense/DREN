@@ -16,10 +16,10 @@ Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2020). Divergence
 
 **BibTex:**
 ```
-@article{peeples2021divergence,
-  title={Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification},
+@article{peeples2020divergence,
+  title={Divergence Regulated Encoder Network for Joint Dimensionality Reduction and Classification},
   author={Peeples, Joshua and Walker, Sarah and McCurley, Connor and Zare, Alina and Keller, James},
-  journal={arXiv preprint arXiv: 2012.15764},
+  journal={arXiv preprint arXiv:2012.15764},
   year={2020}
 }
 ```
