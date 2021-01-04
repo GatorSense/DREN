@@ -90,7 +90,7 @@ https://github.com/GatorSense/DREN
 
 This source code is licensed under the license found in the [`LICENSE`](LICENSE) file in the root directory of this source tree.
 
-This product is Copyright (c) 2021 J. Peeples, S. Walker, C. McCurley, A. Zare, & J. Keller. All rights reserved.
+This product is Copyright (c) 2020 J. Peeples, S. Walker, C. McCurley, A. Zare, & J. Keller. All rights reserved.
 
 ## <a name="CitingHist"></a>Citing Divergence Regulated Encoder Network (DREN)
 
@@ -98,15 +98,15 @@ If you use the Divergence Regulated Encoder Network (DREN) code, please cite the
 
 **Plain Text:**
 
-Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2021). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint arXiv: 2012.15764.
+Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2020). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint arXiv: 2012.15764.
 
 **BibTex:**
 ```
-@article{peeples2021divergence,
-  title={Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification},
+@article{peeples2020divergence,
+  title={Divergence Regulated Encoder Network for Joint Dimensionality Reduction and Classification},
   author={Peeples, Joshua and Walker, Sarah and McCurley, Connor and Zare, Alina and Keller, James},
-  journal={arXiv preprint arXiv: 2012.15764},
-  year={2021}
+  journal={arXiv preprint arXiv:2012.15764},
+  year={2020}
 }
 ```
 
