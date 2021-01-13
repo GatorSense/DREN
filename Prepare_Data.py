@@ -115,7 +115,7 @@ def Prepare_DataLoaders(Network_parameters, split,input_size=224):
             test_setting.append(list(sorted(set(samples) - set(sample_combos[ii]))))
          
         train_val_dataset = KTH_TIPS_2b_data(data_dir,train=True,
-                                         img_transform=data_transforms['test'],
+                                         img_transform=data_transforms['train'],
                                          train_setting=train_setting[split])
         test_dataset = KTH_TIPS_2b_data(data_dir,train=False,
                                          img_transform=data_transforms['test'],
