@@ -44,6 +44,7 @@ class MINC_2500_data(Dataset):
                         "img": img_file,
                         "label": temp_label
                     })
+                    self.targets.append(temp_label)
         elif data == 'val':  # val
             sample_dir = os.path.join(
                 imgset_dir + 'labels/validate' + str(numset) + '.txt')  # check if string includes train
@@ -66,6 +67,7 @@ class MINC_2500_data(Dataset):
                         "img": img_file,
                         "label": temp_label
                     })
+                    self.targets.append(temp_label)
         else:  # test
             sample_dir = os.path.join(
                 imgset_dir + 'labels/test' + str(numset) + '.txt')  # check if string includes train
@@ -88,6 +90,7 @@ class MINC_2500_data(Dataset):
                         "img": img_file,
                         "label": temp_label
                     })
+                    self.targets.append(temp_label)
 
     def __len__(self):
         return len(self.files)

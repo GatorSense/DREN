@@ -35,6 +35,8 @@ from Utils.Generate_Embedding_Vid import Generate_Embed_Vid
 from Utils.Generate_Histogram_Vid import Generate_Hist_Vid
 from Utils.Plot_Decision_Boundary import plot_decision_boundary
 
+plt.ioff()
+
 # Location of experimental results
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 fig_size = Results_parameters['fig_size']

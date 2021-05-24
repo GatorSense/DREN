@@ -12,7 +12,6 @@ class Embedding_model(nn.Module):
   
         #Define fully connected layer, backbone (feature extractor),
         #and embedding
-        # self.fc = model.fc
         self.fc = nn.Linear(embed_dim,model.fc.out_features)
         model.fc = nn.Sequential()
         self.features = model
@@ -24,10 +23,6 @@ class Embedding_model(nn.Module):
 
         #Pass in input through backbone
         x = self.features(x)
-        
-        # #Pass through fully conneted layer and embedding model (separate)
-        # x_fc = self.fc(x)
-        # x_embed = self.encoder(x)
         
         #Pass through fully conneted layer and embedding model (in-line)
         x_embed = self.encoder(x)

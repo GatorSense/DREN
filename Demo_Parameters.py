@@ -25,7 +25,7 @@ histogram = True
 #Select dataset. Set to number of desired texture dataset
 # For KTH, currently training on 2 samples, validating on 1 sample, and testing
 # on 1 sample
-data_selection = 4
+data_selection = 1
 Dataset_names = { 1: 'DTD', 2: 'GTOS-mobile', 3: 'MINC_2500', 4: 'KTH_TIPS'}
 
 #Number of bins for histogram layer. Recommended values are 4, 8 and 16.
@@ -53,7 +53,7 @@ scale = 5
 #Recommended values are to have the new layers at
 #a learning rate 10 times larger than the pt learning rate.
 #e.g., new_lr = .001 and pt_lr = .01
-pt_lr = .01
+pt_lr = .001
 new_lr = .01
 
 #Set weights for objective term: value(s) should be between 0 and 1.
@@ -62,7 +62,7 @@ weights = [0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]
 
 
 #Embedding dimension of encoder
-embed_dim = [2,3]
+embed_dim = [2,3,4,8,16]
 
 #Type of divergence measure to use when calculating TSNE loss
 #This will be the method to determine the embedding loss between the low
@@ -76,7 +76,7 @@ divergence_method = ['Renyi']
 dof = 1
 
 #alpha for Renyi's divergence
-alpha = [0,.5,1.5,2]
+alpha = [.5,1]
 
 #Parameters of Histogram Layer
 #For no padding, set 0. If padding is desired,
@@ -113,7 +113,7 @@ gamma = .1
 #the recommended training batch size is 128 (as done in paper)
 #May need to reduce batch size if CUDA out of memory issue occurs
 batch_size = {'train': 128, 'val': 128, 'test': 128}
-num_epochs = 30
+num_epochs = 100
 
 #Resize the image before center crop. Recommended values for resize is 256 (used in paper), 384,
 #and 512 (from http://openaccess.thecvf.com/content_cvpr_2018/papers/Xue_Deep_Texture_Manifold_CVPR_2018_paper.pdf)
@@ -127,9 +127,10 @@ pin_memory = True
 #Set number of workers, i.e., how many subprocesses to use for data loading.
 #Usually set to 0 or 1. Can set to more if multiple machines are used.
 #Number of workers for experiments for two GPUs was three
-num_workers = 0
-#cpus = os.getenv('SLURM_CPUS_PER_TASK')
-#num_workers = int(cpus) - 1
+# num_workers = 0
+cpus = os.getenv('SLURM_CPUS_PER_TASK')
+num_workers = int(cpus) - 1
+
 #Output feature map size after histogram layer
 feat_map_size = 4
 

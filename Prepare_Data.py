@@ -69,7 +69,7 @@ def Prepare_DataLoaders(Network_parameters, split,input_size=224):
     
         # Create training and test datasets
     if Dataset=='DTD':
-        train_val_dataset = DTD_data(data_dir, data='train and val',
+        train_dataset = DTD_data(data_dir, data='train',
                                            numset = split + 1,
                                            img_transform=data_transforms['train'])
         validation_dataset = DTD_data(data_dir, data='val',
@@ -78,9 +78,12 @@ def Prepare_DataLoaders(Network_parameters, split,input_size=224):
         test_dataset = DTD_data(data_dir, data = 'test',
                                            numset = split + 1,
                                            img_transform=data_transforms['test'])
-
+        
+        #Combine training and validation data, use 10% for validation
+        train_val_dataset = torch.utils.data.ConcatDataset([train_dataset,validation_dataset])
+        
         indices = np.arange(len(train_val_dataset))
-        y = [sub['label'] for sub in train_val_dataset.files]
+        y = train_val_dataset.datasets[0].targets + train_val_dataset.datasets[1].targets
 
         # Use stratified split to balance training validation splits, set random state to be same for each encoding method
         _, _, _, _, train_indices, val_indices = train_test_split(y, y, indices, stratify=y, test_size=.1, random_state=10)
@@ -120,8 +123,9 @@ def Prepare_DataLoaders(Network_parameters, split,input_size=224):
         test_dataset = KTH_TIPS_2b_data(data_dir,train=False,
                                          img_transform=data_transforms['test'],
                                          test_setting=test_setting[split])
+        
         indices = np.arange(len(train_val_dataset))
-        y = [sub['label'] for sub in train_val_dataset.files]
+        y = train_val_dataset.targets
 
         # Use stratified split to balance training validation splits, set random state to be same for each encoding method
         _, _, _, _, train_indices, val_indices = train_test_split(y, y, indices, stratify=y, test_size=.1,

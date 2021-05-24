@@ -21,6 +21,7 @@ class DTD_data(Dataset):
     def __init__(self, texture, data='train', numset=1, img_transform=None):
         self.texture = texture
         self.img_transform = img_transform
+        self.targets = []
         self.files = []
 
         imgset_dir = os.path.join(self.texture)
@@ -50,6 +51,8 @@ class DTD_data(Dataset):
                         "img": img_file,
                         "label": temp_label
                     })
+                    
+                    self.targets.append(temp_label)
         elif data == 'val':  # val
             sample_dir = os.path.join(
                 imgset_dir + 'labels/val' + str(numset) + '.txt')  # check if string includes train
@@ -72,49 +75,7 @@ class DTD_data(Dataset):
                         "img": img_file,
                         "label": temp_label
                     })
-        elif data == 'train and val':
-            sample_dir = os.path.join(
-                imgset_dir + 'labels/train' + str(numset) + '.txt')  # check if string includes train
-            with open(sample_dir) as g:
-                line = g.readline()
-                comp_label = line[:line.find('/')].rstrip('\n')
-
-            with open(sample_dir) as f:
-                for line in f:
-                    img_file = line.rstrip('\n')
-                    label = line[:line.find('/')]
-
-                    if (comp_label != label):
-                        comp_label = label
-                        temp_label += 1
-
-                    img_file = os.path.join(imgset_dir + '/images/' + img_file)
-
-                    self.files.append({
-                        "img": img_file,
-                        "label": temp_label
-                    })
-            sample_dir = os.path.join(
-                imgset_dir + 'labels/val' + str(numset) + '.txt')  # check if string includes train
-            with open(sample_dir) as g:
-                line = g.readline()
-                comp_label = line[:line.find('/')].rstrip('\n')
-
-            with open(sample_dir) as f:
-                for line in f:
-                    img_file = line.rstrip('\n')
-                    label = line[:line.find('/')]
-
-                    if (comp_label != label):
-                        comp_label = label
-                        temp_label += 1
-
-                    img_file = os.path.join(imgset_dir + '/images/' + img_file)
-
-                    self.files.append({
-                        "img": img_file,
-                        "label": temp_label
-                    })
+                    self.targets.append(temp_label)
         else:  # test
             sample_dir = os.path.join(
                 imgset_dir + 'labels/test' + str(numset) + '.txt')  # check if string includes train
@@ -137,6 +98,7 @@ class DTD_data(Dataset):
                         "img": img_file,
                         "label": temp_label
                     })
+                    self.targets.append(temp_label)
 
     def __len__(self):
         return len(self.files)

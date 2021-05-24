@@ -25,6 +25,7 @@ class KTH_TIPS_2b_data(Dataset):
         self.train_setting = train_setting
         self.test_setting = test_setting
         self.files = []
+        self.targets = []
 
         imgset_dir = os.path.join(self.data_dir, 'Images')
         # indexing variable for label
@@ -48,6 +49,7 @@ class KTH_TIPS_2b_data(Dataset):
                                     "img": img_file,
                                     "label": label
                                 })
+                                self.targets.append(label)
                 else:
                     for ii in range(0, len(test_setting)):
                         # Only look at testing samples of interest
@@ -60,6 +62,7 @@ class KTH_TIPS_2b_data(Dataset):
                                     "img": img_file,
                                     "label": label
                                 })
+                                self.targets.append(label)
                 temp_label = temp_label + 1
 
     def __len__(self):

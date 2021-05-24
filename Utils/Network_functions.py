@@ -24,7 +24,7 @@ from torchvision import models
 
 ## Local external libraries
 from Utils.Histogram_Model import HistRes
-# from barbar import Bar
+from barbar import Bar
 from Utils.Embedding_Model import Embedding_model
 
 import pdb
@@ -133,17 +133,17 @@ def train_model(model, dataloaders, criterion, optimizer, device,
                 if(histogram):
                     if dim_reduced:
                         #save bins and widths
-                        saved_bins[epoch+1,:] = model.features.histogram_layer[-1].centers.detach().cpu().numpy()
-                        saved_widths[epoch+1,:] = model.features.histogram_layer[-1].widths.reshape(-1).detach().cpu().numpy()
+                        saved_bins[epoch+1,:] = model.module.features.histogram_layer[-1].centers.detach().cpu().numpy()
+                        saved_widths[epoch+1,:] = model.module.features.histogram_layer[-1].widths.reshape(-1).detach().cpu().numpy()
                     else:
                         # save bins and widths
-                        saved_bins[epoch + 1, :] = model.features.histogram_layer.centers.detach().cpu().numpy()
-                        saved_widths[epoch + 1, :] = model.features.histogram_layer.widths.reshape(
+                        saved_bins[epoch + 1, :] = model.module.features.histogram_layer.centers.detach().cpu().numpy()
+                        saved_widths[epoch + 1, :] = model.module.features.histogram_layer.widths.reshape(
                             -1).detach().cpu().numpy()
 
             # deep copy the model
             if phase == 'val' and epoch_acc > best_acc:
-                #          if phase == 'val' and epoch_loss < best_loss: #Save model that achieves lowest loss
+              
                 best_epoch = epoch
                 best_acc = epoch_acc
                 # best_loss = epoch_loss
@@ -160,9 +160,6 @@ def train_model(model, dataloaders, criterion, optimizer, device,
                     temp_embeddings, temp_labels = Get_Embeddings(dataloaders,
                                                                   model, device, class_names,
                                                                   model.embed_dim)
-                    # ani = animation.FuncAnimation(vid_fig,Get_Embeddings(dataloaders,
-                    #                               model,device,class_names,
-                    #                               model.embed_dim))
                     dict_embeddings.append(temp_embeddings)
                     dict_labels.append(temp_labels)
 
@@ -175,16 +172,11 @@ def train_model(model, dataloaders, criterion, optimizer, device,
             print('{} Embedding Loss: {:.4f}'.format(phase, epoch_loss_embed))
             print()
     
-    # if frames: #If not empty
-    #     vid_fig = plt.figure(figsize=(14,6))
-    #     ani = animation.ArtistAnimation(vid_fig, frames, interval=50, blit=True,
-    #                                 repeat_delay=1000) 
-    #     plt.show()       
+     
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
-    # print('Best val Acc: {:4f}'.format(best_acc))
-    print('Best val Loss: {:4f}'.format(best_loss))
+    print('Best val Acc: {:4f}'.format(best_acc))
     print()
 
     # load best model weights

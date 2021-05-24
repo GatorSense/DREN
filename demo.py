@@ -25,6 +25,7 @@ from Demo_Parameters import Network_parameters
 from Prepare_Data import Prepare_DataLoaders
 from Texture_information import Class_names
 from Utils.TSNE_Loss import TSNE_Loss
+import pdb
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 # Name of dataset
@@ -112,9 +113,9 @@ for divergence_method in Network_parameters['divergence_method']:
                         reduced_dim = int((num_feature_maps / feat_map_size) / (numBins))
                         if (Network_parameters['in_channels'][model_name] == reduced_dim):
                             dim_reduced = False
-                            saved_bins[0, :] = model_ft.module.features.histogram_layer[
+                            saved_bins[0, :] = model_ft.features.histogram_layer[
                                 -1].centers.detach().cpu().numpy()
-                            saved_widths[0, :] = model_ft.module.features.histogram_layer[-1].widths.reshape(
+                            saved_widths[0, :] = model_ft.features.histogram_layer[-1].widths.reshape(
                                 -1).detach().cpu().numpy()
                         else:
                             dim_reduced = True
@@ -122,25 +123,27 @@ for divergence_method in Network_parameters['divergence_method']:
                                 -1].centers.detach().cpu().numpy()
                             saved_widths[0, :] = model_ft.features.histogram_layer[-1].widths.reshape(
                                 -1).detach().cpu().numpy()
-                            # When running on hpg, model_ft.module.features...
+                            # When running on hpg, model_ft.features...
                     else:
                         saved_bins = None
                         saved_widths = None
                         dim_reduced = None
 
                     # Use same learning rate for whole model
-                    optimizer_ft = optim.Adam(model_ft.parameters(), lr=Network_parameters['pt_lr'])
+                    # optimizer_ft = optim.Adam(model_ft.parameters(), lr=Network_parameters['pt_lr'])
 
                     # Setup the loss fxn
                     class_criterion = nn.CrossEntropyLoss()
-                    # embedding_criterion = nn.MSELoss()
+                 
                     embedding_criterion = TSNE_Loss(reduction='mean', device=device, dof=Network_parameters['dof'], alpha=alpha,
                                                     loss_metric=divergence_method)
                     criterion = {'class': class_criterion, 'embed': embedding_criterion}
-                    # scheduler = optim.lr_scheduler.StepLR(optimizer_ft,
-                    # step_size=Network_parameters['step_size'],
-                    # gamma= Network_parameters['gamma'])
+                 
                     scheduler = None
+                    
+                
+                    params = list(model_ft.parameters()) + list(embedding_criterion.parameters())
+                    optimizer_ft = optim.Adam(params, lr=Network_parameters['pt_lr'])
 
                     # Train and evaluate
                     train_dict = train_model(model_ft, dataloaders_dict, criterion, optimizer_ft, device,
