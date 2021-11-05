@@ -333,7 +333,7 @@ for divergence_method in Results_parameters['divergence_method']:
                     box = ax6.get_position()
                     ax6.set_position([box.x0, box.y0 + box.height * 0.1, box.width, box.height * 0.9])
                     ax6.legend(loc='upper center', bbox_to_anchor=(.5, -.05), fancybox=True, ncol=4)
-                  plt.axis('off')
+                    plt.axis('off')
 
                     fig6.savefig((sub_dir + 'Embedding_Visual_Test_Data_FC.png'), dpi=fig6.dpi)
                     plt.close()

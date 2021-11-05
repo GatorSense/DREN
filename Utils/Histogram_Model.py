@@ -20,29 +20,56 @@ class HistRes(nn.Module):
         #Default to use resnet18, otherwise use Resnet50
         if model_name == 'resnet18':
             self.backbone = models.resnet18(pretrained=pretrained)
-            if self.add_bn:
-                self.bn_norm = nn.BatchNorm2d(512)
+            num_ftrs = self.backbone.fc.in_features
             
         elif model_name == 'resnet50':
             self.backbone = models.resnet50(pretrained=pretrained)
-            if self.add_bn:
-                self.bn_norm = nn.BatchNorm2d(2048)
+            num_ftrs = self.backbone.fc.in_features
+                
+        elif model_name == "resnet50_wide":
+            self.backbone = models.wide_resnet50_2(pretrained=pretrained)
+            num_ftrs = self.backbone.fc.in_features
+           
+            
+        elif model_name == "resnet50_next":
+            self.backbone = models.resnext50_32x4d(pretrained=pretrained)
+            num_ftrs = self.backbone.fc.in_features
+            
+        elif model_name == "densenet121":
+            model_ft = models.densenet121(pretrained=pretrained,memory_efficient=True)
+            num_ftrs = model_ft.classifier.in_features
+            
+        elif model_name == "efficientnet":
+            model_ft = models.efficientnet_b0(pretrained=pretrained)
+            num_ftrs = model_ft.classifier.in_features
+            
+        elif model_name == "regnet":
+            model_ft = models.regnet_x_400mf(pretrained)
+            num_ftrs = model_ft.classifier.in_features
+        
             
         else: 
             print('Model not defined')
             
+        if self.add_bn:
+            self.bn_norm = nn.BatchNorm2d(num_ftrs)
+            
         
         #Define histogram layer and fc
         self.histogram_layer = histogram_layer
-        self.fc = self.backbone.fc
-        self.backbone.fc = torch.nn.Sequential()
+        
+        try:
+            self.fc = self.backbone.fc
+            self.backbone.fc = torch.nn.Sequential()
+        except:
+            self.fc = self.backbone.classifier
+            self.backbone.classifier = torch.nn.Sequential()
         
         
     def forward(self,x):
 
         #All scales except for scale 5 default to parallel
-        #Will add series implementation later
-        #pdb.set_trace()
+        pdb.set_trace()
         if self.scale == 1:
             output = self.forward_scale_1(x)
         elif self.scale == 2:

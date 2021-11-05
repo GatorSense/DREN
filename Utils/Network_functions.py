@@ -332,6 +332,7 @@ def initialize_model(model_name, num_classes, in_channels, out_channels,
 
     # Baseline model
     else:
+        pdb.set_trace()
         if model_name == "resnet18":
             """ Resnet18
             """
@@ -349,6 +350,47 @@ def initialize_model(model_name, num_classes, in_channels, out_channels,
             num_ftrs = model_ft.fc.in_features
             model_ft.fc = nn.Linear(num_ftrs, num_classes)
             input_size = 224
+            
+        elif model_name == "resnet50_wide":
+            model_ft = models.wide_resnet50_2(pretrained=use_pretrained)
+            set_parameter_requires_grad(model_ft, feature_extract)
+            num_ftrs = model_ft.fc.in_features
+            model_ft.fc = nn.Linear(num_ftrs, num_classes)
+            input_size = 224
+            
+        elif model_name == "resnet50_next":
+            model_ft = models.resnext50_32x4d(pretrained=use_pretrained)
+            set_parameter_requires_grad(model_ft, feature_extract)
+            num_ftrs = model_ft.fc.in_features
+            model_ft.fc = nn.Linear(num_ftrs, num_classes)
+            input_size = 224
+            
+        elif model_name == "densenet121":
+            model_ft = models.densenet121(pretrained=use_pretrained,memory_efficient=True)
+            set_parameter_requires_grad(model_ft, feature_extract)
+            num_ftrs = model_ft.classifier.in_features
+            model_ft.classifier = nn.Sequential()
+            model_ft.fc = nn.Linear(num_ftrs, num_classes)
+            input_size = 224
+            
+        elif model_name == "efficientnet":
+            model_ft = models.efficientnet_b0(pretrained=use_pretrained)
+            set_parameter_requires_grad(model_ft, feature_extract)
+            num_ftrs = model_ft.classifier.in_features
+            model_ft.classifier = nn.Sequential()
+            model_ft.fc = nn.Linear(num_ftrs, num_classes)
+            input_size = 224
+            
+        elif model_name == "regnet":
+            model_ft = models.regnet_x_400mf(pretrained=use_pretrained)
+            set_parameter_requires_grad(model_ft, feature_extract)
+            num_ftrs = model_ft.classifier.in_features
+            model_ft.classifier = nn.Sequential()
+            model_ft.fc = nn.Linear(num_ftrs, num_classes)
+            input_size = 224
+    
+        else:
+            raise RuntimeError('{} not implemented'.format(model_name))
         
     #Take model and return embedding model
     model_ft = Embedding_model(model_ft,input_feat_size=num_ftrs,

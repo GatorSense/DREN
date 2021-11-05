@@ -31,9 +31,9 @@ from Prepare_Data import Prepare_DataLoaders
 from Utils.RBFHistogramPooling import HistogramLayer
 from Utils.Confusion_mats import plot_confusion_matrix, plot_avg_confusion_matrix
 from Utils.Generate_Learning_Curves import Plot_Learning_Curves
-from Utils.Generate_Embedding_Vid import Generate_Embed_Vid
-from Utils.Generate_Histogram_Vid import Generate_Hist_Vid
-from Utils.Plot_Decision_Boundary import plot_decision_boundary
+# from Utils.Generate_Embedding_Vid import Generate_Embed_Vid
+# from Utils.Generate_Histogram_Vid import Generate_Hist_Vid
+# from Utils.Plot_Decision_Boundary import plot_decision_boundary
 
 plt.ioff()
 
@@ -134,29 +134,29 @@ for divergence_method in Results_parameters['divergence_method']:
                     # Remove pickle files
                     del train_pkl_file, test_pkl_file
 
-                    # #Load model
-                    histogram_layer = HistogramLayer(int(num_feature_maps / (feat_map_size * numBins)),
-                                                     Results_parameters['kernel_size'][model_name],
-                                                     num_bins=numBins, stride=Results_parameters['stride'],
-                                                     normalize_count=Results_parameters['normalize_count'],
-                                                     normalize_bins=Results_parameters['normalize_bins'])
+                    # # #Load model
+                    # histogram_layer = HistogramLayer(int(num_feature_maps / (feat_map_size * numBins)),
+                    #                                  Results_parameters['kernel_size'][model_name],
+                    #                                  num_bins=numBins, stride=Results_parameters['stride'],
+                    #                                  normalize_count=Results_parameters['normalize_count'],
+                    #                                  normalize_bins=Results_parameters['normalize_bins'])
 
-                    # Initialize the histogram model for this run
-                    model, input_size = initialize_model(model_name, num_classes,
-                                                         Results_parameters['in_channels'][model_name],
-                                                         num_feature_maps,
-                                                         feature_extract=Results_parameters['feature_extraction'],
-                                                         histogram=Results_parameters['histogram'],
-                                                         histogram_layer=histogram_layer,
-                                                         parallel=Results_parameters['parallel'],
-                                                         use_pretrained=Results_parameters['use_pretrained'],
-                                                         add_bn=Results_parameters['add_bn'],
-                                                         scale=Results_parameters['scale'],
-                                                         feat_map_size=feat_map_size,
-                                                         embed_dim=dimension)
+                    # # Initialize the histogram model for this run
+                    # model, input_size = initialize_model(model_name, num_classes,
+                    #                                      Results_parameters['in_channels'][model_name],
+                    #                                      num_feature_maps,
+                    #                                      feature_extract=Results_parameters['feature_extraction'],
+                    #                                      histogram=Results_parameters['histogram'],
+                    #                                      histogram_layer=histogram_layer,
+                    #                                      parallel=Results_parameters['parallel'],
+                    #                                      use_pretrained=Results_parameters['use_pretrained'],
+                    #                                      add_bn=Results_parameters['add_bn'],
+                    #                                      scale=Results_parameters['scale'],
+                    #                                      feat_map_size=feat_map_size,
+                    #                                      embed_dim=dimension)
 
-                    # Set device to cpu or gpu (if available)
-                    device_loc = torch.device(device)
+                    # # Set device to cpu or gpu (if available)
+                    # device_loc = torch.device(device)
 
                     # Generate learning curves
                     Plot_Learning_Curves(train_dict['train_acc_track'],
@@ -166,31 +166,31 @@ for divergence_method in Results_parameters['divergence_method']:
                                          train_dict['best_epoch'],
                                          sub_dir, weight)
 
-                    # If parallelized, need to set change model
-                    if Results_parameters['Parallelize']:
-                        model = nn.DataParallel(model)
+                    # # If parallelized, need to set change model
+                    # if Results_parameters['Parallelize']:
+                    #     model = nn.DataParallel(model)
 
-                    # model.load_state_dict(train_dict['best_model_wts'])
-                    model.load_state_dict(torch.load(sub_dir + 'Best_Weights.pt'
-                                                     , map_location=device_loc))
-                    model = model.to(device)
+                    # # model.load_state_dict(train_dict['best_model_wts'])
+                    # model.load_state_dict(torch.load(sub_dir + 'Best_Weights.pt'
+                    #                                  , map_location=device_loc))
+                    # model = model.to(device)
 
-                    dataloaders_dict = Prepare_DataLoaders(Results_parameters, split,
-                                                           input_size=input_size)
+                    # dataloaders_dict = Prepare_DataLoaders(Results_parameters, split,
+                    #                                        input_size=input_size)
 
-                    if (Results_parameters['TSNE_visual']):
-                        print("Initializing Datasets and Dataloaders...")
+                    # if (Results_parameters['TSNE_visual']):
+                    #     print("Initializing Datasets and Dataloaders...")
 
-                        dataloaders_dict = Prepare_DataLoaders(Results_parameters, split,
-                                                               input_size=input_size)
-                        print('Creating TSNE Visual...')
+                    #     dataloaders_dict = Prepare_DataLoaders(Results_parameters, split,
+                    #                                            input_size=input_size)
+                    #     print('Creating TSNE Visual...')
 
-                        # Generate TSNE visual
-                        FDR_scores[:, split], log_FDR_scores[:, split] = Generate_TSNE_visual(
-                            dataloaders_dict,
-                            model.features, sub_dir, device, class_names,
-                            histogram=Results_parameters['histogram'],
-                            Separate_TSNE=Results_parameters['Separate_TSNE'])
+                    #     # Generate TSNE visual
+                    #     FDR_scores[:, split], log_FDR_scores[:, split] = Generate_TSNE_visual(
+                    #         dataloaders_dict,
+                    #         model.features, sub_dir, device, class_names,
+                    #         histogram=Results_parameters['histogram'],
+                    #         Separate_TSNE=Results_parameters['Separate_TSNE'])
                     # Create CM for testing data
                     cm = confusion_matrix(test_dict['GT'], test_dict['Predictions'])
                     # Create classification report
@@ -224,35 +224,35 @@ for divergence_method in Results_parameters['divergence_method']:
                     with open((sub_dir + 'MCC.txt'), "w") as output:
                         output.write(str(MCC[split]))
                     directory = os.path.dirname(os.path.dirname(sub_dir)) + '/'
-                    # Visualize embeddings as model changes
-                    if (dimension == 2 or
-                            dimension == 3):
-                        x = []
-                        for batch in train_dict['embedding_epochs']:
-                            x.extend(batch['train'])
-                        y = []
-                        for batch in train_dict['embedding_labels']:
-                            y.extend(batch['train'])
+                    # # Visualize embeddings as model changes
+                    # if (dimension == 2 or
+                    #         dimension == 3):
+                    #     x = []
+                    #     for batch in train_dict['embedding_epochs']:
+                    #         x.extend(batch['train'])
+                    #     y = []
+                    #     for batch in train_dict['embedding_labels']:
+                    #         y.extend(batch['train'])
 
-                        plot_decision_boundary(   train_dict['embedding_epochs'][29]['train'],
-                                      train_dict['embedding_labels'][29]['train'], model)
+                    #     plot_decision_boundary(   train_dict['embedding_epochs'][29]['train'],
+                    #                   train_dict['embedding_labels'][29]['train'], model)
 
-                        silhouette_scores, CH_scores = Generate_Embed_Vid(train_dict['embedding_epochs'],
-                                                                          train_dict['embedding_labels'],
-                                                                          sub_dir, model, class_names=class_names,
-                                                                          embed_dim=dimension)
-                        silhouette_scores_train.append(silhouette_scores[0])
-                        silhouette_scores_test.append(silhouette_scores[2])
-                        silhouette_scores_c_train.append(silhouette_scores[1])
-                        silhouette_scores_c_test.append(silhouette_scores[3])
-                        CH_scores_train.append(CH_scores[0])
-                        CH_scores_test.append(CH_scores[1])
+                    #     silhouette_scores, CH_scores = Generate_Embed_Vid(train_dict['embedding_epochs'],
+                    #                                                       train_dict['embedding_labels'],
+                    #                                                       sub_dir, model, class_names=class_names,
+                    #                                                       embed_dim=dimension)
+                    #     silhouette_scores_train.append(silhouette_scores[0])
+                    #     silhouette_scores_test.append(silhouette_scores[2])
+                    #     silhouette_scores_c_train.append(silhouette_scores[1])
+                    #     silhouette_scores_c_test.append(silhouette_scores[3])
+                    #     CH_scores_train.append(CH_scores[0])
+                    #     CH_scores_test.append(CH_scores[1])
 
-                    # ***TBD*** Visualize histogram bins and widths using 2D scatter plot
-                    if Results_parameters['histogram']:
-                        Generate_Hist_Vid(train_dict['saved_bins'],
-                                          train_dict['saved_widths'],
-                                          numBins, sub_dir)
+                    # # ***TBD*** Visualize histogram bins and widths using 2D scatter plot
+                    # if Results_parameters['histogram']:
+                    #     Generate_Hist_Vid(train_dict['saved_bins'],
+                    #                       train_dict['saved_widths'],
+                    #                       numBins, sub_dir)
 
                     # pdb.set_trace()
 
