@@ -1,7 +1,7 @@
 # Downloading datasets:
 
 Note: Due to the size of the datasets, the images were not 
-upload to the repository. For the DREN paper, only KTH-TIPS-2b and DTD were used. We also have
+upload to the repository. For the DREN paper, only KTH-TIPS-2b, DTD, and PRMI were used. We also have
 two large scale datasets, GTOS-mobile and MINC-2500, implemented for the code.
 Please follow the following instructions
 to ensure the code works. If any of these datasets are used,
@@ -74,6 +74,53 @@ Computer Vision and Pattern Recognition (pp. 3606-3613).
 	     Title     = {Describing Textures in the Wild},
 	     Booktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Recognition ({CVPR})},
 	     Year      = {2014}}
+```
+##  Plant Root Minirhizotron Imagery (PRMI) [[`BibTeX`](#CitingPRMI)]
+
+Please download the [`PRMI dataset`](https://gatorsense.github.io/PRMI/) 
+and follow these instructions:
+
+1. Download and unzip the file
+2. Name the folder `PRMI`
+3. The structure of the `PRMI` folder is as follows:
+```
+└── root dir
+    ├── val   // Validation data.
+        ├── images   // Input images.
+        ├── labels_image_gt   // Metadata for each image.
+        ├── masks_pixel_gt   // Pixel label ground truth masks.
+    ├── train // Training data.
+        ├── images   // Input images.
+        ├── labels_image_gt   // Metadata for each image.
+        ├── masks_pixel_gt   // Pixel label ground truth masks.
+    ├── test  // Test data. 
+        ├── images   // Input images.
+        ├── labels_image_gt   // Metadata for each image.
+        ├── masks_pixel_gt   // Pixel label ground truth masks.  
+```
+## <a name="CitingPRMI"></a>Citing PRMI
+
+If you use the PRMI dataset, please cite the following reference using the following entry.
+
+**Plain Text:**
+
+W. Xu, G. Yu, Y. Cui, R. Gloaguen, A. Zare, J. Bonnette, J. Reyes-Cabrera, A. Rajurkar, D. Rowland, R. Matamala, 
+J. Jastrow, T. Juenger, and F. Fritschi. “PRMI: A Dataset of Minirhizotron Images for Diverse Plant Root Study.” 
+In AI for Agriculture and Food Systems (AIAFS) Workshops at the AAAI conference on artificial intelligence. 
+February, 2022.
+
+**BibTex:**
+```
+@misc{xu2022prmi,
+      title={PRMI: A Dataset of Minirhizotron Images for Diverse Plant Root Study}, 
+      author={Weihuang Xu and Guohao Yu and Yiming Cui and Romain Gloaguen and Alina Zare and Jason Bonnette 
+      and Joel Reyes-Cabrera and Ashish Rajurkar and Diane Rowland and Roser Matamala and Julie D. Jastrow 
+      and Thomas E. Juenger and Felix B. Fritschi},
+      year={2022},
+      eprint={2201.08002},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
 ## Extension of the Ground Terrain in Outdoor Scenes (GTOS-mobile) [[`BibTeX`](#CitingGTOS_m)]
 

@@ -1,12 +1,14 @@
 # Divergence Regulated Encoder Network:
 **Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification**
 
-_Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, and James Keller_
+_Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, James Keller and Weihuang Xu_
 
-Note: If this code is used, cite it: Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, & James Keller. 
+Note: If this code is used, cite it: Joshua Peeples, Sarah Walker, Connor McCurley, Alina Zare, James Keller, & Weihuang Xu. 
 (2020, December 30). GatorSense/DREN: Initial Release (Version v1.0). 
 Zenodo. https://doi.org/10.5281/zenodo.4404604 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4404604.svg)](https://doi.org/10.5281/zenodo.4404604)
+
+[[`IEEE GRSL`](https://doi.org/10.1109/LGRS.2022.3156532)]
 
 [[`arXiv`](https://arxiv.org/abs/2012.15764)]
 
@@ -61,10 +63,11 @@ https://github.com/GatorSense/DREN
 └── root dir
     ├── demo.py   //Run this. Main demo file.
     ├── Demo_Parameters.py // Parameters file for demo.
+    ├── Capture_Metrics.py // Save validation and test performance in spreadsheet.
+    ├── Convergence_Analysis.py // Analyze convergence of models for each dataset.
     ├── Prepare_Data.py  // Load data for demo file.
     ├── Texture_Information.py // Class names and directories for datasets.
     ├── View_Results.py // Run this after demo to view saved results.
-    ├── View_Results_Parameters.py // Parameters file for results.
     ├── knn_experiment.py // Trains and tests a KNN with the embeddings produced by the model and embeddings produced through t-SNE
     ├── Out_of_Sample.py // Produces an embedding with out of sample points by learning the manifold of the original embedding
     ├── papers  // Related publications.
@@ -79,7 +82,8 @@ https://github.com/GatorSense/DREN
         ├── Generate_TSNE_visual.py  // Generate TSNE visualization for features.
         ├── Histogram_Model.py  // Generate HistRes_B models.
         ├── Network_functions.py  // Contains functions to initialize, train, and test model. 
-        ├── Plot_Decision_Boundary.py // Plots the decision boundary found by the model
+        ├── Plot_Accuracy.py // Plots the average and std of metrics for each model
+        ├── Plot_Decision_Boundary.py // Plots the decision boundary found by the model.    
         ├── RBFHistogramPooling.py  // Create histogram layer. 
         ├── Save_Results.py  // Save results from demo script.
         ├── TSNE_Loss.py  // Includes functions to compute the embedding loss found by t-SNE methods
@@ -90,7 +94,7 @@ https://github.com/GatorSense/DREN
 
 This source code is licensed under the license found in the [`LICENSE`](LICENSE) file in the root directory of this source tree.
 
-This product is Copyright (c) 2020 J. Peeples, S. Walker, C. McCurley, A. Zare, & J. Keller. All rights reserved.
+This product is Copyright (c) 2022 J. Peeples, S. Walker, C. McCurley, A. Zare, J. Keller, & W. Xu. All rights reserved.
 
 ## <a name="CitingHist"></a>Citing Divergence Regulated Encoder Network (DREN)
 
@@ -98,15 +102,19 @@ If you use the Divergence Regulated Encoder Network (DREN) code, please cite the
 
 **Plain Text:**
 
-Peeples, J., Walker, S., McCurley, C., Zare, A., & Keller, J. (2020). Divergence Regulated Encoder Network For Joint Dimensionality Reduction And Classification. arXiv preprint arXiv: 2012.15764.
+J. Peeples, S. Walker, C. Mccurley, A. Zare, J. Keller and W. Xu, "Divergence Regulated Encoder Network for Joint Dimensionality Reduction and Classification," in IEEE Geoscience and Remote Sensing Letters, vol. 19, pp. 1-5, 2022, Art no. 3511305, doi: 10.1109/LGRS.2022.3156532.
 
 **BibTex:**
 ```
-@article{peeples2020divergence,
-  title={Divergence Regulated Encoder Network for Joint Dimensionality Reduction and Classification},
-  author={Peeples, Joshua and Walker, Sarah and McCurley, Connor and Zare, Alina and Keller, James},
-  journal={arXiv preprint arXiv:2012.15764},
-  year={2020}
-}
+@ARTICLE{peeples2022divergence,
+  author={Peeples, Joshua and Walker, Sarah and Mccurley, Connor and Zare, Alina and Keller, James and Xu, Weihuang},
+  journal={IEEE Geoscience and Remote Sensing Letters}, 
+  title={Divergence Regulated Encoder Network for Joint Dimensionality Reduction and Classification}, 
+  year={2022},
+  volume={19},
+  number={},
+  pages={1-5},
+  doi={10.1109/LGRS.2022.3156532}
+  }
 ```
 

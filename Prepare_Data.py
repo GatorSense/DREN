@@ -22,7 +22,7 @@ from Datasets.DTD_loader import DTD_data
 from Datasets.MINC_2500 import MINC_2500_data
 from Datasets.GTOS_mobile_single_size import GTOS_mobile_single_data
 from Datasets.KTH_TIPS_2b import KTH_TIPS_2b_data
-
+from Datasets.PRMI_Dataloader_Classification import PRMIDataset
 
 def Prepare_DataLoaders(Network_parameters, split,input_size=224):
     
@@ -135,6 +135,14 @@ def Prepare_DataLoaders(Network_parameters, split,input_size=224):
         train_sampler = SubsetRandomSampler(train_indices)
         val_sampler = SubsetRandomSampler(val_indices)
         dataset_sampler = {'train': train_sampler, 'val': val_sampler, 'test': None}
+        
+    elif Dataset == 'PRMI':
+        train_dataset = PRMIDataset(root=data_dir, subset='train',
+                                           img_transform=data_transforms['train'])
+        val_dataset = PRMIDataset(root=data_dir, subset='val',
+                                           img_transform=data_transforms['test'])
+        test_dataset = PRMIDataset(root=data_dir, subset ='test',
+                                           img_transform=data_transforms['test'])
 
     else: #Need to create separate validation dataset from training
         # Create training and test datasets

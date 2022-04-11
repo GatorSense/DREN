@@ -27,7 +27,8 @@ def Parameters(args):
     # For KTH, currently training on 2 samples, validating on 1 sample, and testing
     # on 1 sample
     data_selection = args.data_selection
-    Dataset_names = { 1: 'DTD', 2: 'GTOS-mobile', 3: 'MINC_2500', 4: 'KTH_TIPS'}
+    Dataset_names = { 1: 'DTD', 2: 'GTOS-mobile', 3: 'MINC_2500', 4: 'KTH_TIPS',
+                     5: 'PRMI'}
     
     #Number of bins for histogram layer. Recommended values are 4, 8 and 16.
     #Set number of bins to powers of 2 (e.g., 2, 4, 8, etc.)
@@ -91,7 +92,9 @@ def Parameters(args):
     
     #Reduce dimensionality based on number of output feature maps from GAP layer
     #Used to compute number of features from histogram layer
-    out_channels = {"resnet50": 2048, "resnet18": 512, "efficientnet": 512}
+    out_channels = {"resnet50": 2048, "resnet18": 512, "efficientnet": 1280, 
+                    "resnet50_wide": 2048, "resnet50_next": 2048, "densenet121": 4096,
+                    "regnet": 400}
     
     #Set whether to have the histogram layer inline or parallel (default: parallel)
     #Set whether to use sum (unnormalized count) or average pooling (normalized count)
@@ -136,24 +139,34 @@ def Parameters(args):
     # Current values will produce 2x2 local feature maps
     if scale == 1:
         stride = [32, 32]
-        in_channels = {"resnet50": 64, "resnet18": 64, "efficientnet": 64}
-        kernel_size = {"resnet50": [64,64], "resnet18": [64,64], "efficientnet": [64,64]}
+        in_channels = {"resnet50": 64, "resnet18": 64, "efficientnet": 64, "regnet": 64,
+                       "resnet50_wide": 64, "resnet50_next": 64, "densenet121": 64}
+        kernel_size = {"resnet50": [64,64], "resnet18": [64,64], "efficientnet": [64,64], "regnet": [64,64],
+                       "resnet50_wide": [64,64], "resnet50_next": [64,64], "densenet121": [64,64]}
     elif scale == 2:
         stride = [16, 16]
-        in_channels = {"resnet50": 256, "resnet18": 64, "efficientnet": 64}
-        kernel_size = {"resnet50": [32,32],  "resnet18": [32,32], "efficientnet": [32,32]}
+        in_channels = {"resnet50": 256, "resnet18": 64, "efficientnet": 64, "regnet": 64,
+                       "resnet50_wide": 64, "resnet50_next": 64, "densenet121": 64}
+        kernel_size = {"resnet50": [32,32],  "resnet18": [32,32], "efficientnet": [32,32], "regnet": [32,32],
+                       "resnet50_wide": [32,32], "resnet50_next": [32,32], "densenet121": [32,32]}
     elif scale == 3:
         stride = [8, 8]
-        in_channels = {"resnet50": 512, "resnet18": 128, "efficientnet": 128}
-        kernel_size = {"resnet50": [16,16],  "resnet18": [16,16], "efficientnet": [16,16]}
+        in_channels = {"resnet50": 512, "resnet18": 128, "efficientnet": 128, "regnet": 128,
+                       "resnet50_wide": 512, "resnet50_next": 512, "densenet121": 128}
+        kernel_size = {"resnet50": [16,16],  "resnet18": [16,16], "efficientnet": [16,16], "regnet": [32,32],
+                       "resnet50_wide": [16,16], "resnet50_next": [16,16], "densenet121": [16,16]}
     elif scale == 4:
         stride = [4, 4]
-        in_channels = {"resnet50": 1024, "resnet18": 256, "efficientnet": 256}
-        kernel_size = {"resnet50": [8,8],  "resnet18": [8,8], "efficientnet": [16,16]}
+        in_channels = {"resnet50": 1024, "resnet18": 256, "efficientnet": 256, "regnet": 256,
+                       "resnet50_wide": 1024, "resnet50_next": 1024, "densenet121": 256}
+        kernel_size = {"resnet50": [8,8],  "resnet18": [8,8], "efficientnet": [16,16], "regnet": [64,64],
+                       "resnet50_wide": [32,32], "resnet50_next": [32,32], "densenet121": [32,32]}
     else:
         stride = [2, 2]
-        in_channels = {"resnet50": 2048, "resnet18": 512, "efficientnet": 512}
-        kernel_size = {"resnet50": [4,4],  "resnet18": [4,4], "efficientnet": [16,16]}
+        in_channels = {"resnet50": 2048, "resnet18": 512, "efficientnet": 1280, "regnet": 400,
+                       "resnet50_wide": 2048, "resnet50_next": 2048, "densenet121": 1024}
+        kernel_size = {"resnet50": [4,4],  "resnet18": [4,4], "efficientnet": [4,4], "regnet": [4,4],
+                       "resnet50_wide": [4,4], "resnet50_next": [4,4], "densenet121": [1,1]}
     
     #Visualization of results parameters
     #Visualization parameters for figures
@@ -183,7 +196,8 @@ def Parameters(args):
     Data_dirs = {'DTD': './Datasets/DTD/',
                  'MINC_2500': './Datasets/minc-2500/',
                  'GTOS-mobile': './Datasets/gtos-mobile',
-                 'KTH_TIPS': './Datasets/KTH-TIPS2-b'}
+                 'KTH_TIPS': './Datasets/KTH-TIPS2-b',
+                 'PRMI': './Datasets/PRMI'}
     
     #ResNet models to use for each dataset
     Model_name = args.model
@@ -192,13 +206,15 @@ def Parameters(args):
     num_classes = {'DTD': 47,
                    'MINC_2500': 23,
                    'GTOS-mobile': 31,
-                   'KTH_TIPS': 11}
+                   'KTH_TIPS': 11,
+                   'PRMI': 4}
     
     #Number of runs and/or splits for each dataset
     Splits = {'DTD': 10,
               'MINC_2500': 5,
               'GTOS-mobile': 5,
-              'KTH_TIPS': 4}
+              'KTH_TIPS': 4,
+              'PRMI': 5}
     
     Dataset = Dataset_names[data_selection]
     data_dir = Data_dirs[Dataset]
